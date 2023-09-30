@@ -1,29 +1,14 @@
-# version: '3'
-
-# services:
-#   db:
-#     image: mysql:8.0 # Image MySQL 8.0
-#     restart: always
-#     ports:
-#       - "3906:3306" # Map the port of MySQL to the host
-#     environment:
-#       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Root password
-#       MYSQL_DATABASE: ${DB_NAME}         # DB Name
-#     container_name: cogsz
-#     volumes:
-#       - ./mysql_data:/var/lib/mysql # Mount the volume 
 version: '3'
-
 
 services:
   db:
-    image: postgres:14.3
+    image: mysql:8.0 # Image MySQL 8.0
     restart: always
     ports:
-      - "5432:5432"
+      - "3906:3306" # Map the port of MySQL to the host
     environment:
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Root password
+      MYSQL_DATABASE: ${DB_NAME}         # DB Name
     container_name: cogsz
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ./mysql_data:/var/lib/mysql # Mount the volume 
