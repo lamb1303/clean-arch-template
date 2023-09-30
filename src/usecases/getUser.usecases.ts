@@ -8,8 +8,8 @@ export class GetUserUseCases {
     private readonly userRepository: UserRepository,
   ) {}
 
-  async execute(name: string): Promise<User> {
-    this.logger.log('GetUserByName execute', `User ${name}`);
-    return await this.userRepository.getUserByUsername(name);
+  async execute(id: number): Promise<User> {
+    this.logger.log('GetUserByid execute', `User ${id}`);
+    return await this.userRepository.getUserByUserId(id);
   }
 }

@@ -12,10 +12,10 @@ export class DatabaseUserRepository implements UserRepository {
     private readonly userEntityRepository: Repository<User>,
   ) {}
 
-  async getUserByUsername(username: string): Promise<UserM> {
+  async getUserByUserId(id: number): Promise<UserM> {
     const adminUserEntity = await this.userEntityRepository.findOne({
       where: {
-        username: username,
+        id,
       },
     });
     if (!adminUserEntity) {
@@ -37,6 +37,7 @@ export class DatabaseUserRepository implements UserRepository {
 
     adminUser.id = adminUserEntity.id;
     adminUser.username = adminUserEntity.username;
+    adminUser.email = adminUserEntity.email;
 
     return adminUser;
   }

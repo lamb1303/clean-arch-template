@@ -16,21 +16,21 @@ export class UserController {
     private readonly getUserUsecaseProxy: UseCaseProxy<GetUserUseCases>,
   ) {}
 
-  // @Get('user')
-  // @ApiResponseType(UserPresenter, false)
-  // async getUser(@Query('id', ParseIntPipe) name: string) {
-  //   const User = await this.getUserUsecaseProxy.getInstance().execute(name);
-  //   return new UserPresenter(User);
-  // }
   @Get()
   @ApiResponseType(UserPresenter, false)
-  async getUser() {
-    return [
-      {
-        user: {
-          name: 'Test',
-        },
-      },
-    ];
+  async getUser(@Query('id', ParseIntPipe) id: number) {
+    const User = await this.getUserUsecaseProxy.getInstance().execute(id);
+    return new UserPresenter(User);
   }
+  // @Get()
+  // @ApiResponseType(UserPresenter, false)
+  // async getUser() {
+  //   return [
+  //     {
+  //       user: {
+  //         name: 'Test',
+  //       },
+  //     },
+  //   ];
+  // }
 }
