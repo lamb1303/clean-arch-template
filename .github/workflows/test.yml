@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - main  # Adjust this to your main branch name
+      - main # Adjust this to your main branch name
 
 jobs:
   test:
@@ -16,20 +16,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18  # Adjust to your Node.js version
+          node-version: 16 # Specify Node.js v16 here
 
       - name: Install Dependencies
-        run: yarn install  # Or npm install if you use npm
+        run: yarn install # Or npm install if you use npm
 
       - name: Run Tests
-        run: yarn test  # Replace with your test command
+        run: yarn test # Replace with your test command
 
       - name: Check Test Status
         id: test-status
-        run: echo "::set-output name=status::$(if [ -f ./test-results.xml ]; then echo 'failed'; else echo 'passed'; fi)"
+        run: |
+          if [ -f ./test-results.xml ]; then
+            echo 'status=failed' >> $GITHUB_ENV
+          else
+            echo 'status=passed' >> $GITHUB_ENV
+          fi
 
       - name: Commit on Test Pass
-        if: steps.test-status.outputs.status == 'passed'
+        if: env.test-status == 'passed'
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -37,6 +42,6 @@ jobs:
           git push
 
       - name: Send Custom Message on Test Failure
-        if: steps.test-status.outputs.status == 'failed'
+        if: env.test-status == 'failed'
         run: |
           echo "Tests failed on ${{ github.sha }}"  # Add your custom message here
