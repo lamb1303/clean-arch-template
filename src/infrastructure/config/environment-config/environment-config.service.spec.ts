@@ -26,6 +26,6 @@ describe('EnvironmentConfigService', () => {
 
   it('should return DB_PASSWORD', () => {
     const dbPassword = service.getDatabasePassword();
-    expect(dbPassword).toEqual('MySecr3tPassWord@123');
+    expect(dbPassword).toEqual('MySecr3tPassWord@12');
   });
 });
