@@ -1,0 +1,42 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to your main branch name
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18  # Adjust to your Node.js version
+
+      - name: Install Dependencies
+        run: yarn install  # Or npm install if you use npm
+
+      - name: Run Tests
+        run: yarn test  # Replace with your test command
+
+      - name: Check Test Status
+        id: test-status
+        run: echo "::set-output name=status::$(if [ -f ./test-results.xml ]; then echo 'failed'; else echo 'passed'; fi)"
+
+      - name: Commit on Test Pass
+        if: steps.test-status.outputs.status == 'passed'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -am "Tests passed on ${{ github.sha }}"
+          git push
+
+      - name: Send Custom Message on Test Failure
+        if: steps.test-status.outputs.status == 'failed'
+        run: |
+          echo "Tests failed on ${{ github.sha }}"  # Add your custom message here
