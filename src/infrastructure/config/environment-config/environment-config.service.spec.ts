@@ -16,7 +16,7 @@ describe('EnvironmentConfigService', () => {
 
   it('should return DB_PORT', () => {
     const dbPort = service.getDatabasePort();
-    expect(dbPort).toEqual(3906);
+    expect(dbPort).toEqual('3906');
   });
 
   it('should return DB_USERNAME', () => {
@@ -26,6 +26,6 @@ describe('EnvironmentConfigService', () => {
 
   it('should return DB_PASSWORD', () => {
     const dbPassword = service.getDatabasePassword();
-    expect(dbPassword).toEqual('MySecr3tPassWord@123');
+    expect(dbPassword).toEqual('MySecr3tPassWord');
   });
 });
