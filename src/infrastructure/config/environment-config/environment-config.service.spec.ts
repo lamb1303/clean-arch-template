@@ -14,7 +14,18 @@ describe('EnvironmentConfigService', () => {
     service = module.get<EnvironmentConfigService>(EnvironmentConfigService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('should return DB_PORT', () => {
+    const dbPort = service.getDatabasePort();
+    expect(dbPort).toEqual(3906);
+  });
+
+  it('should return DB_USERNAME', () => {
+    const dbUsername = service.getDatabaseUser();
+    expect(dbUsername).toEqual('root');
+  });
+
+  it('should return DB_PASSWORD', () => {
+    const dbPassword = service.getDatabasePassword();
+    expect(dbPassword).toEqual('MySecr3tPassWord@123');
   });
 });
