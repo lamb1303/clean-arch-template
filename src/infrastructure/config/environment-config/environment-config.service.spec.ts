@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { EnvironmentConfigModule } from './environment-config.module';
 import { EnvironmentConfigService } from './environment-config.service';
 
 describe('EnvironmentConfigService', () => {
@@ -7,6 +8,7 @@ describe('EnvironmentConfigService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [EnvironmentConfigService],
+      imports: [EnvironmentConfigModule],
     }).compile();
 
     service = module.get<EnvironmentConfigService>(EnvironmentConfigService);

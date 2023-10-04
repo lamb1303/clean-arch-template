@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Make the script itself executable
+chmod +x "$0"
+
+echo "Running tests..."
+yarn test --verbose
+
+# Check the exit status of the test command
+if [ $? -ne 0 ]; then
+  echo "Tests failed. Commit aborted."
+  exit 1
+fi
