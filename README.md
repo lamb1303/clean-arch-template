@@ -15,22 +15,24 @@
 ```
 docker-compose up -d
 ```
-# Docker
-Build custom image (Dockerfile):
+# Quick start with Docker
+To start the API, ensure you have the proper values for the ```.env``` and the ```env/local.env``` files, then simply run
 ```
-docker build -t image_name .
+docker compose up -d --build
 ```
-Excecute MySQL(port 3306) container:
+This will raise the database and the node application in different containers, named ```cogsz``` and ```cogsz-api```, respectively.
+## Logs:
 ```
-docker run -d --name my_container -p 3306:3306 image_name
+docker logs -f cogsz
+docker logs -f cogsz-api
 ```
-Logs:
+## Shutdown the application:
 ```
-docker logs container_name
+docker compose down
 ```
-Down the database:
+## Run tests inside the container
 ```
-docker-compose down
+docker exec -it cogsz-api yarn test
 ```
 # Versioning
 ```
