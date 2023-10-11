@@ -15,8 +15,6 @@
 ```
 docker-compose up -d
 ```
-8. Start: ```yarn start:dev```
-
 # Docker
 Build custom image (Dockerfile):
 ```

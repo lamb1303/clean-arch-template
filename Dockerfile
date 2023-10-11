@@ -1,11 +1,19 @@
-# Image MySQL
-FROM mysql:8.0
+# Use an official Node.js version
+FROM node:18.12.1
+# Set the working directory
+WORKDIR /usr/src
 
-# Environment Variables
-ENV MYSQL_ROOT_PASSWORD=MySecr3tPassWord
-ENV MYSQL_DATABASE=cogsz
-ENV MYSQL_USER=cogsz
-ENV MYSQL_PASSWORD=MySecr3tPassWord
+# Copy package.json and yarn.lock to the container
+COPY package*.json yarn.lock ./
 
-# Expose the MySQL port
-EXPOSE 3306
+# Install Node.js dependencies using Yarn
+RUN yarn install
+
+# Copy the rest of your application code
+COPY . .
+
+# Expose the port on which your app will run
+EXPOSE 3000
+
+# Define the command to run your app
+CMD ["yarn", "start:dev"]
