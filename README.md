@@ -15,23 +15,22 @@
 ```
 docker-compose up -d
 ```
-# Docker
-Build custom image (Dockerfile):
+# Quick start with Docker
+To start the API, ensure you have the proper values for the ```.env``` and the ```env/local.env``` files, then simply run
 ```
-docker build -t image_name .
+docker compose up -d
 ```
-Excecute MySQL(port 3306) container:
+This will raise the database and the node application in different containers
+## Testing inside the container
+To run the tests you need to first know the ID of the container the app is running on. To get this information, run ```docker ps```, you'll get an output like this:
 ```
-docker run -d --name my_container -p 3306:3306 image_name
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                  NAMES
+d134b749f04a   clean-arch-template-app   "docker-entrypoint.s…"   6 seconds ago   Up 6 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp              cogsz_api
+b83cf338f227   mysql:8.0                 "docker-entrypoint.s…"   2 hours ago     Up 6 seconds   33060/tcp, 0.0.0.0:3906->3306/tcp, :::3906->3306/tcp   cogsz
 ```
-Logs:
-```
-docker logs container_name
-```
-Down the database:
-```
-docker-compose down
-```
+Look for the container with the name "cogsz-api" and copy its id.
+
+Now, we can run the tests using ```docker exec -it <container_id> yarn test```
 # Versioning
 ```
 Node v18.12.1

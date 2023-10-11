@@ -14,6 +14,7 @@ services:
       - ./mysql_data:/var/lib/mysql
 
   app:
+    container_name: cogsz-api
     build:
       context: ./  # Specify the path to your NestJS app directory
       dockerfile: Dockerfile  # Name of your NestJS Dockerfile
@@ -23,3 +24,5 @@ services:
       - db
     command: ["yarn", "start:dev"]
     restart: always
+    volumes:
+      - .:/usr/src
