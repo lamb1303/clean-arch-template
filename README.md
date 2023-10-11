@@ -18,19 +18,22 @@ docker-compose up -d
 # Quick start with Docker
 To start the API, ensure you have the proper values for the ```.env``` and the ```env/local.env``` files, then simply run
 ```
-docker compose up -d
+docker compose up -d --build
 ```
-This will raise the database and the node application in different containers
-## Testing inside the container
-To run the tests you need to first know the ID of the container the app is running on. To get this information, run ```docker ps```, you'll get an output like this:
+This will raise the database and the node application in different containers, named ```cogsz``` and ```cogsz-api```, respectively.
+## Logs:
 ```
-CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                  NAMES
-d134b749f04a   clean-arch-template-app   "docker-entrypoint.s…"   6 seconds ago   Up 6 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp              cogsz_api
-b83cf338f227   mysql:8.0                 "docker-entrypoint.s…"   2 hours ago     Up 6 seconds   33060/tcp, 0.0.0.0:3906->3306/tcp, :::3906->3306/tcp   cogsz
+docker logs -f cogsz
+docker logs -f cogsz-api
 ```
-Look for the container with the name "cogsz-api" and copy its id.
-
-Now, we can run the tests using ```docker exec -it <container_id> yarn test```
+## Shutdown the application:
+```
+docker compose down
+```
+## Run tests inside the container
+```
+docker exec -it cogsz-api yarn test
+```
 # Versioning
 ```
 Node v18.12.1
