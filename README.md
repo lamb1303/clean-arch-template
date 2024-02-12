@@ -2,9 +2,6 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-
-# Cogs'z API
-
 1. Clone the project
 2. ```yarn install```
 3. Clone the file ```.env.template``` inside the ```env``` folder and rename it to ```local.env``` 
